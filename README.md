@@ -1,109 +1,43 @@
-# Machine learning project
 
-Total 24pts.
+## Dataset
+The dataset is gotten from http://archive.ics.uci.edu/ml/datasets/Bank+Marketing#
 
-Tasks:
-1. Write a project proposal in `ProjectProposal.md`
-2. Complete the project. In `ProjectReadme.md` include:
-  - Background on your code files
-  - How to run your code, guide to install any additional packages
-  - Results, interpretation and reflection
+The data folder contains 3 download links. I used the `bank-additional.zip` link. The zip folder contains 2 csv files, the one used for this project is `bank-additional.csv`
+  
+ ## How to run the code
+All the work done for this project was done in the IPython notebook `bank_marketing.ipynb`. This can be run using any software you use to run .ipynb file. I used a jupyter notebook for this project.
 
-## 1. Proposal (6pts)
-1. Why: Question/Topic being investigated 2pts
-2. How: Plan of attack 2pts
-3. What: Dataset, models, framework, components 2pts
+The modules needed are:
+- mglearn
+- numpy
+- pandas
+- scikit learn
 
-### Example 1
-1. Why: Question being investigated 2pt  
+## Results:
+#### Default Model
 
-I would like to understand better how the decision tree algorithm works.
+Default threshold : 0.5
 
-2. How: Plan of attack 2pt
+precision: 0.69
 
-In *insert reference here* a guide to implement decision trees from scratch is available. I will download the code, run with the tutorial dataset (very small) and then apply it to a real dataset (see below) and compare to scikit-learn. Furthermore, I will try and implement early stopping by introducting `max_depth` parameter. This is not part of the tutorial code and an extension.
+recall: 0.38
 
-3. What: Dataset, models, framework, components 2pts
+accuracy: 0.91
 
-- UCI dataset *insert url here* (13 features, 300 samples)
-- Code from *insert code github url*
-- Scikit-learn DecisionTreeClassifier
+#### Fine-tuned Model
+Optimal threshold : 0.61
 
-### Example 2
-1. Why: Question being investigated 2pt
+precision:  0.74
 
-I would like to see what it takes to participate in a Kaggle machine learning competition.
+recall: 0.22
 
-2. How: Plan of attack 2pt
-
-I have created an account on Kaggle and they recommend starting with the Titanic classification problem. I will follow these guidlines to prepare a notebook and submit it. I will use the Lab3 notebook as a template.
-
-If time premits, a second competition will be selected and prepared.
-
-3. What: Dataset, models, framework, components 2pts
-
-- Kaggle competition url *insert url*
-- Scikit-learn classifiers: LogisticRegression, RandomForest, GradientBoosting, SVC
-- Possibility to explore XGBoost library as an alternate classifier.
-
-### Example 3
-1. Why: Question being investigated 2pt
-
-I am interested in learning more about putting a model into production.
-
-2. How: Plan of attack 2pt
-
-Initial research showed, that mlflow *insert url* is a framework that allows for training and deploying machine learning models. On their website *insert url here* there are numerous tutorials. I am planning to follow the following:
-- Tutorial 1 *add description*
-- Tutorial 2 *add description*
-
-Subsequently, I will adapt the tutorial code to create a website that allows entering Iris flower sepal and petal measurements, and the classifier displays the predicted type of Iris flower. To demonstrate this pipeline, only one classifier will be trained.
-
-3. What: Dataset, models, framework, components 2pts
-
-- mlflow *url here* with submodules *module 1* *module 2*
-- mlflow to serve the model as a RESTapi
-- Scikit-learn Iris dataset
-- Scikit-learn classifiers: LogisticRegression
-- Flask framework to setup up webserver.
-
-The Flask server will provide the front-end for the website allowing the user to enter Iris measurements. Upon submission of the measurements, Flask will call the mlflow RESTapi to obtain the prediction results. Flask then displayes the results as: predicted class, probability and a sample image of the Iris class.
+accuracy:  0.91
 
 
+## Interpretation
+My assumption for this application is that we want the marketing campaign to have as minimal negative responses as possible, this because the bank is working on a tight marketing budget. We only want to market to people whom we are relatively confident will say yes. 
 
-## 2. Final report (18pts)
-1. Code 6pts
-  - Runs 2pts
-  - Complete 2pts
-  - Organized 2pts
-2. Results 6pts
-  - Data summarized/visualized 3pts
-  - Model selection organized and explained 3pts
-3. Interpretation 3pts
-  - As described in the proposal, was the question answered/topic investigated and how?
-4. Reflection 3pts
-  - Where there deviations from proposal? Explain why (or why not).
+The fine-tuned model is fairly useful for the task because I was able to get a precision of 0.74 which is better than 0.69 from the default random forest model gotten from our grid search.
 
-
-## 3. Project ideas
-
-### Gaining more confidence
-Use lab2 or lab3 as a template and select a different dataset. Run through the steps that make sense for the data, add new steps if necessary, and show your solution.
-
-### Becoming competitive
-Select a kaggle.com competition and try to put together a solution for the problem.
-
-### Implementing from scratch
-Browse Data Sceince from Scratch for an algorithm of interest. Or use any other blog that guides through an implementation from scratch for your favourite algorithm. Demonstrate your working code on a different dataset than the guid/book used.
-
-### Machine learning history
-Write about the history of machine learning and algorithms. Here it would be important to provide a new perspective. For example, can the sequence of algorithms reported be correlated with popularity of these algorithms?
-
-### Investigating a machine learning library or framework
-If you find an interesting library or framework, you would follow the intoroduction tutorial and try to adapt it to new data.
-
-### Machine learning theory
-Write about the mathematics used in one of your favourite algorithms. Here it would be important to connect any equation to code. The goal would be to make theory more accessible to others.
-
-### Machine learning productizing
-Describe a problem that would need a frontend or app to bring a machine learnign model to users. Design the system, select frameworks, maybe build a small prototype.
+## Reflection
+I was able to compare the performance of different classifiers on this dataset and practice using pipelines which were my two goals for this project. I would however have liked to improve the performance of my gradient boosted classifier, but with my computer resources the amount of time it took to run a grid search for hyperparameter tuning did not allow me to achieve this. 
